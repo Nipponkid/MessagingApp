@@ -9,4 +9,9 @@
     <Folder Include="wwwroot\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MessagingApp.Domain\MessagingApp.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

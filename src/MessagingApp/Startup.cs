@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+
+using MessagingApp.Domain;
 
 namespace MessagingApp
 {
@@ -18,6 +21,9 @@ namespace MessagingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var contacts = new List<Contact>() { new Contact("John", "Smith") };
+            services.AddTransient(x => contacts);
+
             services.AddControllers();
         }
 
