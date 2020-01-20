@@ -8,7 +8,13 @@ namespace MessagingApp.Domain.Tests
 
         public ContactTests()
         {
-            contact = new Contact("John", "Smith");
+            contact = new Contact(0, "John", "Smith");
+        }
+
+        [Fact]
+        public void a_contact_has_an_id()
+        {
+            Assert.Equal(0, contact.Id);
         }
 
         [Fact]
@@ -21,6 +27,13 @@ namespace MessagingApp.Domain.Tests
         public void a_contact_has_a_last_name()
         {
             Assert.Equal("Smith", contact.LastName);
+        }
+
+        [Fact]
+        public void two_contacts_with_the_same_first_and_last_name_are_equal()
+        {
+            var john = new Contact(1, "John", "Smith");
+            Assert.Equal(contact, john);
         }
     }
 }

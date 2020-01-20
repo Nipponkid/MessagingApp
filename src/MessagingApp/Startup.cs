@@ -21,7 +21,7 @@ namespace MessagingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var contacts = new List<Contact>() { new Contact("John", "Smith") };
+            var contacts = new List<Contact>() { new Contact(0, "John", "Smith") };
             services.AddTransient(x => contacts);
 
             services.AddControllers();

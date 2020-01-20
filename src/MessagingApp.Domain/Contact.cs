@@ -1,29 +1,28 @@
 ﻿namespace MessagingApp.Domain
 {
-    public struct Contact
+    public sealed class Contact
     {
-        private readonly string firstName;
-        private readonly string lastName;
-
-        public Contact(string firstName, string lastName)
+        public Contact(long id, string firstName, string lastName)
         {
-            this.firstName = firstName;
-            this.lastName = lastName;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
-        public string FirstName
+        public long Id { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+
+        public override bool Equals(object obj)
         {
-            get
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
             {
-                return firstName;
+                return false;
             }
-        }
-
-        public string LastName
-        {
-            get
+            else
             {
-                return lastName;
+                Contact c = (Contact)obj;
+                return (FirstName == c.FirstName) && (LastName == c.LastName);
             }
         }
     }
