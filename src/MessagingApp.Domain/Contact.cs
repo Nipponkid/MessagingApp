@@ -22,7 +22,7 @@
             else
             {
                 Contact c = (Contact)obj;
-                return (FirstName == c.FirstName) && (LastName == c.LastName);
+                return Id == c.Id;
             }
         }
     }
