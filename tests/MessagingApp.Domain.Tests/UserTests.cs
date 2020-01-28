@@ -22,5 +22,12 @@ namespace MessagingApp.Domain.Tests
         {
             Assert.Equal("user0@example.com", user.Email);
         }
+
+        [Fact]
+        public void two_users_with_the_same_email_are_equal()
+        {
+            var secondUser = new User(1, "user0@example.com");
+            Assert.Equal(secondUser, user);
+        }
     }
 }
