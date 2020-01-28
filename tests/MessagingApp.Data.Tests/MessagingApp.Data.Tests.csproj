@@ -20,4 +20,7 @@
     <ProjectReference Include="..\..\src\MessagingApp.Domain\MessagingApp.Domain.csproj" />
     <ProjectReference Include="..\..\src\MessagingApp.Data\MessagingApp.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ContactsServiceTests.cs" />
+  </ItemGroup>
 </Project>
