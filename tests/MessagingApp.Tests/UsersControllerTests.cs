@@ -31,7 +31,7 @@ namespace MessagingApp.Tests
         public void a_users_controller_can_add_a_new_user()
         {
             var newUser = new User(2, "user2@example.com");
-            controller.Create(newUser);
+            controller.CreateUser(newUser);
             Assert.True(controller.Users.Contains(newUser));
         }
     }

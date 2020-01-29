@@ -22,7 +22,7 @@ namespace MessagingApp.Controllers
             }
         }
 
-        public void Create(User newUser)
+        public void CreateUser(User newUser)
         {
             users.Add(newUser);
         }
