@@ -24,7 +24,10 @@
             else
             {
                 Contact c = (Contact)obj;
-                return Id == c.Id;
+                return (Id == c.Id)
+                    && (UserId == c.UserId)
+                    && (FirstName == c.FirstName)
+                    && (LastName == c.LastName);
             }
         }
     }

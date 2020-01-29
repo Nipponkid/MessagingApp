@@ -38,10 +38,12 @@ namespace MessagingApp.Domain.Tests
         }
 
         [Fact]
-        public void two_contacts_with_the_same_id_are_equal()
+        public void two_contacts_with_the_same_properties_are_equal()
         {
-            var jane = new Contact(0, user, "Jane", "Doe");
-            Assert.Equal(contact, jane);
+            var duplicateJohn = new Contact(0, user, "John", "Smith");
+            var jane = new Contact(0, user, "Jane", "Smith");
+            Assert.Equal(duplicateJohn, contact);
+            Assert.NotEqual(jane, contact);
         }
     }
 }
