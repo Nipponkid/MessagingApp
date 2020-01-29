@@ -4,8 +4,8 @@ namespace MessagingApp.Domain.Tests
 {
     public sealed class ContactTests
     {
-        private Contact contact;
-        private User user;
+        private readonly Contact contact;
+        private readonly User user;
 
         public ContactTests()
         {
