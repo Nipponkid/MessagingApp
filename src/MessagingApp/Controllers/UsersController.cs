@@ -26,5 +26,11 @@ namespace MessagingApp.Controllers
         {
             users.Add(newUser);
         }
+
+        public void DeleteUserById(long id)
+        {
+            var userToDelete = users.Find(user => user.Id == id);
+            users.Remove(userToDelete);
+        }
     }
 }

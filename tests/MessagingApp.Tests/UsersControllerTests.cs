@@ -34,5 +34,13 @@ namespace MessagingApp.Tests
             controller.CreateUser(newUser);
             Assert.True(controller.Users.Contains(newUser));
         }
+
+        [Fact]
+        public void a_users_controller_can_delete_a_user_by_id()
+        {
+            var userToDelete = new User(1, "user1@example.com");
+            controller.DeleteUserById(userToDelete.Id);
+            Assert.False(controller.Users.Contains(userToDelete));
+        }
     }
 }
