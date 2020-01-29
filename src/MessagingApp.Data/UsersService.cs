@@ -6,11 +6,24 @@ namespace MessagingApp.Data
 {
     public sealed class UsersService
     {
+        private readonly List<User> users;
+
         public UsersService(List<User> users)
         {
-            Users = users;
+            this.users = users;
         }
 
-        public IEnumerable<User> Users { get; private set; }
+        public IEnumerable<User> Users
+        {
+            get
+            {
+                return users.AsReadOnly();
+            }
+        }
+
+        public void AddUser(User userToAdd)
+        {
+            users.Add(userToAdd);
+        }
     }
 }
