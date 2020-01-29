@@ -2,14 +2,16 @@
 {
     public sealed class Contact
     {
-        public Contact(long id, string firstName, string lastName)
+        public Contact(long id, User user, string firstName, string lastName)
         {
             Id = id;
+            UserId = user.Id;
             FirstName = firstName;
             LastName = lastName;
         }
 
         public long Id { get; private set; }
+        public long UserId { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
 

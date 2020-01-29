@@ -5,16 +5,24 @@ namespace MessagingApp.Domain.Tests
     public sealed class ContactTests
     {
         private Contact contact;
+        private User user;
 
         public ContactTests()
         {
-            contact = new Contact(0, "John", "Smith");
+            user = new User(0, "user0@example.com");
+            contact = new Contact(0, user, "John", "Smith");
         }
 
         [Fact]
         public void a_contact_has_an_id()
         {
             Assert.Equal(0, contact.Id);
+        }
+
+        [Fact]
+        public void a_contact_has_an_id_of_the_user_it_belongs_to()
+        {
+            Assert.Equal(user.Id, contact.UserId);
         }
 
         [Fact]
@@ -32,7 +40,7 @@ namespace MessagingApp.Domain.Tests
         [Fact]
         public void two_contacts_with_the_same_id_are_equal()
         {
-            var jane = new Contact(0, "Jane", "Doe");
+            var jane = new Contact(0, user, "Jane", "Doe");
             Assert.Equal(contact, jane);
         }
     }

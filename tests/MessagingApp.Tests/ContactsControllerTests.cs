@@ -26,8 +26,9 @@ namespace MessagingApp.Tests
 
         private void AddContacts()
         {
-            contacts.Add(new Contact(0, "John", "Smith"));
-            contacts.Add(new Contact(1, "Jane", "Doe"));
+            var user = new User(0, "user0@example.com");
+            contacts.Add(new Contact(0, user, "John", "Smith"));
+            contacts.Add(new Contact(1, user, "Jane", "Doe"));
         }
     }
 }
