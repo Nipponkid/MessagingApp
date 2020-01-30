@@ -1,36 +1,35 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
+using MessagingApp.Data;
 using MessagingApp.Domain;
 
 namespace MessagingApp.Controllers
 {
     public sealed class UsersController
     {
-        private readonly List<User> users;
+        private readonly UsersService usersService;
 
-        public UsersController(IEnumerable<User> users)
+        public UsersController(UsersService usersService)
         {
-            this.users = users.ToList();
+            this.usersService = usersService;
         }
 
         public IEnumerable<User> Users
         {
             get
             {
-                return users.AsReadOnly();
+                return usersService.Users;
             }
         }
 
         public void CreateUser(User newUser)
         {
-            users.Add(newUser);
+            usersService.AddUser(newUser);
         }
 
         public void DeleteUserById(long id)
         {
-            var userToDelete = users.Find(user => user.Id == id);
-            users.Remove(userToDelete);
+            usersService.DeleteUserWithId(id);
         }
     }
 }

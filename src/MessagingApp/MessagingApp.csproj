@@ -13,5 +13,8 @@
     <ProjectReference Include="..\MessagingApp.Domain\MessagingApp.Domain.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\MessagingApp.Data\MessagingApp.Data.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

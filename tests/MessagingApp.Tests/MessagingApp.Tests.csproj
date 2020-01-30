@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\MessagingApp\MessagingApp.csproj" />
     <ProjectReference Include="..\..\src\MessagingApp.Domain\MessagingApp.Domain.csproj" />
+    <ProjectReference Include="..\..\src\MessagingApp.Data\MessagingApp.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ContactTests.cs" />

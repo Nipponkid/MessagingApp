@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 using MessagingApp.Controllers;
+using MessagingApp.Data;
 using MessagingApp.Domain;
-using System.Linq;
 
 namespace MessagingApp.Tests
 {
@@ -11,6 +12,7 @@ namespace MessagingApp.Tests
     {
         private readonly List<User> users;
         private readonly UsersController controller;
+        private readonly UsersService usersService;
 
         public UsersControllerTests()
         {
@@ -18,7 +20,8 @@ namespace MessagingApp.Tests
                 new User(0, "user0@example.com"),
                 new User(1, "user1@example.com")
             };
-            controller = new UsersController(users);
+            usersService = new UsersService(users);
+            controller = new UsersController(usersService);
         }
 
         [Fact]
