@@ -33,5 +33,13 @@ namespace MessagingApp.Data.Tests
             service.AddUser(userToAdd);
             Assert.True(service.Users.Contains(userToAdd));
         }
+
+        [Fact]
+        public void a_users_service_can_delete_a_user_by_id()
+        {
+            var userToDelete = users[0];
+            service.DeleteUserWithId(userToDelete.Id);
+            Assert.False(service.Users.Contains(userToDelete));
+        }
     }
 }
