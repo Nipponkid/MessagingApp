@@ -4,7 +4,7 @@ using MessagingApp.Domain;
 
 namespace MessagingApp.Data
 {
-    public sealed class UsersService
+    public sealed class UsersService : IUsersService
     {
         private readonly List<User> users;
 
