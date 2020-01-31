@@ -39,7 +39,7 @@ namespace MessagingApp.Tests
         [Fact]
         public void a_users_controller_has_a_list_of_all_users()
         {
-            Assert.Equal(users, controller.Users);
+            Assert.Equal(users, controller.Users());
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace MessagingApp.Tests
         {
             var newUser = new User(2, "user2@example.com");
             controller.CreateUser(newUser);
-            Assert.Contains(newUser, controller.Users);
+            Assert.Contains(newUser, controller.Users());
         }
 
         [Fact]
@@ -55,7 +55,7 @@ namespace MessagingApp.Tests
         {
             var userToDelete = new User(1, "user1@example.com");
             controller.DeleteUserById(userToDelete.Id);
-            Assert.DoesNotContain(userToDelete, controller.Users);
+            Assert.DoesNotContain(userToDelete, controller.Users());
         }
     }
 }

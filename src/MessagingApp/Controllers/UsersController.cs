@@ -1,25 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 using MessagingApp.Data;
 using MessagingApp.Domain;
 
 namespace MessagingApp.Controllers
 {
-    public sealed class UsersController
+    [ApiController]
+    [Route("api/users")]
+    public sealed class UsersController : ControllerBase
     {
-        private readonly UsersService usersService;
+        private readonly IUsersService usersService;
 
-        public UsersController(UsersService usersService)
+        public UsersController(IUsersService usersService)
         {
             this.usersService = usersService;
         }
 
-        public IEnumerable<User> Users
+        [HttpGet]
+        public IEnumerable<User> Users()
         {
-            get
-            {
-                return usersService.Users;
-            }
+            return usersService.Users;
         }
 
         public void CreateUser(User newUser)

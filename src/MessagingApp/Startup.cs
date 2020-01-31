@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
+using MessagingApp.Data;
 using MessagingApp.Domain;
 
 namespace MessagingApp
@@ -24,6 +26,9 @@ namespace MessagingApp
             var user = new User(0, "user0@example.com");
             var contacts = new List<Contact>() { new Contact(0, user, "John", "Smith") };
             services.AddTransient(x => contacts);
+
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddDbContext<MessagingAppDbContext>(options => options.UseInMemoryDatabase("Messaging_App_DB"));
 
             services.AddControllers();
         }
