@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 using MessagingApp.Controllers;
@@ -16,11 +17,22 @@ namespace MessagingApp.Tests
 
         public UsersControllerTests()
         {
+            // Cannot use ID 0 because EF will assume it should generate its
+            // own ID since 0 is the default value for a long.
             users = new List<User>() {
-                new User(0, "user0@example.com"),
+                new User(5, "user5@example.com"),
                 new User(1, "user1@example.com")
             };
-            usersService = new UsersService(users);
+            var contextOptions = new DbContextOptionsBuilder<MessagingAppDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            var dbContext = new MessagingAppDbContext(contextOptions);
+            foreach (var user in users)
+            {
+                dbContext.Add(user);
+            }
+            dbContext.SaveChanges();
+            usersService = new UsersService(dbContext);
             controller = new UsersController(usersService);
         }
 
@@ -35,7 +47,7 @@ namespace MessagingApp.Tests
         {
             var newUser = new User(2, "user2@example.com");
             controller.CreateUser(newUser);
-            Assert.True(controller.Users.Contains(newUser));
+            Assert.Contains(newUser, controller.Users);
         }
 
         [Fact]
@@ -43,7 +55,7 @@ namespace MessagingApp.Tests
         {
             var userToDelete = new User(1, "user1@example.com");
             controller.DeleteUserById(userToDelete.Id);
-            Assert.False(controller.Users.Contains(userToDelete));
+            Assert.DoesNotContain(userToDelete, controller.Users);
         }
     }
 }

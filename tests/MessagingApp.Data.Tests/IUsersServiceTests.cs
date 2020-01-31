@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 using MessagingApp.Domain;
@@ -45,7 +47,16 @@ namespace MessagingApp.Data.Tests
     {
         public UsersServiceTests()
         {
-            usersService = new UsersService(users);
+            var contextOptions = new DbContextOptionsBuilder<MessagingAppDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            var dbContext = new MessagingAppDbContext(contextOptions);
+            foreach (var user in users)
+            {
+                dbContext.Add(user);
+            }
+            dbContext.SaveChanges();
+            usersService = new UsersService(dbContext);
         }
     }
 }

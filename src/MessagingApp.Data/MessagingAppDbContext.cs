@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 using MessagingApp.Domain;
 
@@ -12,6 +11,6 @@ namespace MessagingApp.Data
         {
         }
 
-        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

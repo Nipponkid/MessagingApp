@@ -6,30 +6,32 @@ namespace MessagingApp.Data
 {
     public sealed class UsersService : IUsersService
     {
-        private readonly List<User> users;
+        private readonly MessagingAppDbContext context;
 
-        public UsersService(List<User> users)
+        public UsersService(MessagingAppDbContext context)
         {
-            this.users = users;
+            this.context = context;
         }
 
         public IEnumerable<User> Users
         {
             get
             {
-                return users.AsReadOnly();
+                return context.Users;
             }
         }
 
         public void AddUser(User userToAdd)
         {
-            users.Add(userToAdd);
+            context.Add(userToAdd);
+            context.SaveChanges();
         }
 
         public void DeleteUserWithId(long id)
         {
-            var userToRemove = users.Find(user => user.Id == id);
-            users.Remove(userToRemove);
+            var userToRemove = context.Users.Find(id);
+            context.Remove(userToRemove);
+            context.SaveChanges();
         }
     }
 }
