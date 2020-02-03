@@ -43,11 +43,19 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void a_users_controller_can_add_a_new_user()
+        public void a_users_controller_can_post_a_user()
         {
-            var newUser = new User(2, "user2@example.com");
-            controller.CreateUser(newUser);
-            Assert.Contains(newUser, controller.Users());
+            var userToPost = new User(2, "user2@example.com");
+            var postedUser = controller.PostUser(userToPost);
+            Assert.Equal(userToPost, postedUser);
+        }
+
+        [Fact]
+        public void when_a_users_controller_posts_a_user_that_user_is_in_the_list_of_all_users()
+        {
+            var userToPost = new User(7, "user7@example.com");
+            controller.PostUser(userToPost);
+            Assert.Contains(userToPost, controller.Users());
         }
 
         [Fact]

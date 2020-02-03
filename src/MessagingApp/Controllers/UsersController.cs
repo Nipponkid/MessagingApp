@@ -23,9 +23,10 @@ namespace MessagingApp.Controllers
             return usersService.Users;
         }
 
-        public void CreateUser(User newUser)
+        public User PostUser(User userToPost)
         {
-            usersService.AddUser(newUser);
+            var postedUser = usersService.AddUser(userToPost);
+            return postedUser;
         }
 
         public void DeleteUserById(long id)
