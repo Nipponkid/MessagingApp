@@ -21,10 +21,11 @@ namespace MessagingApp.Data
             }
         }
 
-        public void AddUser(User userToAdd)
+        public User AddUser(User userToAdd)
         {
-            context.Add(userToAdd);
+            var addedUser = context.Add(userToAdd);
             context.SaveChanges();
+            return addedUser.Entity;
         }
 
         public void DeleteUserWithId(long id)

@@ -17,8 +17,9 @@ namespace MessagingApp.Data
         /// <summary>
         /// Start managing a new user.
         /// </summary>
+        /// <returns>The new user being managed.</returns>
         /// <param name="user">The new user to manage.</param>
-        public void AddUser(User user);
+        public User AddUser(User user);
 
         /// <summary>
         /// Stop managing a user with a given ID.

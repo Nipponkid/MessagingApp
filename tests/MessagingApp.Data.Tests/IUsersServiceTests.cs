@@ -30,7 +30,8 @@ namespace MessagingApp.Data.Tests
         public void a_users_service_can_add_a_new_user()
         {
             var userToAdd = new User(109143, "user109143@example.com");
-            usersService.AddUser(userToAdd);
+            var createdUser = usersService.AddUser(userToAdd);
+            Assert.Equal(userToAdd, createdUser);
             Assert.Contains(userToAdd, usersService.Users);
         }
 
