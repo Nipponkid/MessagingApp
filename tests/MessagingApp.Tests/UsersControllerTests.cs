@@ -51,10 +51,19 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void getting_a_user_by_id_returns_200_OK_for_valid_id()
+        public void getting_a_user_by_a_valid_id_returns_200_OK()
         {
             var userIdToGet = users[0].Id;
             Assert.IsType<OkObjectResult>(controller.GetUserById(userIdToGet));
+        }
+
+        [Fact]
+        public void getting_a_user_by_a_valid_id_returns_that_user()
+        {
+            var userToGet = users[0];
+            var idOfUserToGet = userToGet.Id;
+            var response = controller.GetUserById(idOfUserToGet) as OkObjectResult;
+            Assert.Equal(userToGet, response.Value);
         }
 
         [Fact]
