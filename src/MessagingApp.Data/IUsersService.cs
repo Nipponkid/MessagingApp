@@ -15,6 +15,13 @@ namespace MessagingApp.Data
         public IEnumerable<User> Users { get; }
 
         /// <summary>
+        /// Find a specific user being managed.
+        /// </summary>
+        /// <param name="id">The ID of the user to find.</param>
+        /// <returns>The managed user with the given ID.</returns>
+        public User FindUserWithId(long id);
+
+        /// <summary>
         /// Start managing a new user.
         /// </summary>
         /// <returns>The new user being managed.</returns>

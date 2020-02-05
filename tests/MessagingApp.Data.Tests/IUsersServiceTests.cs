@@ -27,6 +27,14 @@ namespace MessagingApp.Data.Tests
         }
 
         [Fact]
+        public void a_users_service_can_find_a_user_with_id()
+        {
+            var userToFind = users[1];
+            var idOfUserToFind = userToFind.Id;
+            Assert.Equal(userToFind, usersService.FindUserWithId(idOfUserToFind));
+        }
+
+        [Fact]
         public void a_users_service_can_add_a_new_user()
         {
             var userToAdd = new User(109143, "user109143@example.com");

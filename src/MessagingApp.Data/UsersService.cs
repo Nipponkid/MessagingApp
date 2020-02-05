@@ -21,6 +21,11 @@ namespace MessagingApp.Data
             }
         }
 
+        public User FindUserWithId(long id)
+        {
+            return context.Users.Find(id);
+        }
+
         public User AddUser(User userToAdd)
         {
             var addedUser = context.Add(userToAdd);
