@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -39,7 +40,14 @@ namespace MessagingApp.Tests
         [Fact]
         public void a_users_controller_has_a_list_of_all_users()
         {
-            Assert.Equal(users, controller.Users());
+            var result = controller.Users() as OkObjectResult;
+            Assert.Equal(users, result.Value);
+        }
+
+        [Fact]
+        public void getting_all_users_returns_a_200_OK()
+        {
+            Assert.IsType<OkObjectResult>(controller.Users());
         }
 
         [Fact]
@@ -55,7 +63,8 @@ namespace MessagingApp.Tests
         {
             var userToPost = new User(7, "user7@example.com");
             controller.PostUser(userToPost);
-            Assert.Contains(userToPost, controller.Users());
+            var resultingUsers = controller.Users() as OkObjectResult;
+            Assert.Contains(userToPost, resultingUsers.Value as IEnumerable<User>);
         }
 
         [Fact]
@@ -63,7 +72,8 @@ namespace MessagingApp.Tests
         {
             var userToDelete = new User(1, "user1@example.com");
             controller.DeleteUserById(userToDelete.Id);
-            Assert.DoesNotContain(userToDelete, controller.Users());
+            var resultingUsers = controller.Users() as OkObjectResult;
+            Assert.DoesNotContain(userToDelete, resultingUsers.Value as IEnumerable<User>);
         }
     }
 }

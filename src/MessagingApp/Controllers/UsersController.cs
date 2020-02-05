@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 using MessagingApp.Data;
 using MessagingApp.Domain;
@@ -18,9 +17,9 @@ namespace MessagingApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Users()
+        public IActionResult Users()
         {
-            return usersService.Users;
+            return Ok(usersService.Users);
         }
 
         public User PostUser(User userToPost)
