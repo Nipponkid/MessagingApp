@@ -22,6 +22,11 @@ namespace MessagingApp.Controllers
             return Ok(usersService.Users);
         }
 
+        public IActionResult GetUserById(long id)
+        {
+            return Ok(null);
+        }
+
         public User PostUser(User userToPost)
         {
             var postedUser = usersService.AddUser(userToPost);
