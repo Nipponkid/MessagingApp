@@ -35,7 +35,7 @@ namespace MessagingApp.Data
 
         public void DeleteUserWithId(long id)
         {
-            var userToRemove = context.Users.Find(id);
+            var userToRemove = FindUserWithId(id);
             context.Remove(userToRemove);
             context.SaveChanges();
         }
