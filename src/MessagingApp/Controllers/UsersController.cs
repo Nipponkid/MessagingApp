@@ -27,10 +27,10 @@ namespace MessagingApp.Controllers
             return Ok(usersService.FindUserWithId(id));
         }
 
-        public User PostUser(User userToPost)
+        public IActionResult PostUser(User userToPost)
         {
             var postedUser = usersService.AddUser(userToPost);
-            return postedUser;
+            return CreatedAtAction(nameof(GetUserById), new { id = userToPost.Id }, userToPost);
         }
 
         public void DeleteUserById(long id)

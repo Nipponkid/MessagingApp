@@ -67,11 +67,11 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void a_users_controller_can_post_a_user()
+        public void posting_a_valid_user_returns_201_Created_with_Location_header()
         {
-            var userToPost = new User(2, "user2@example.com");
-            var postedUser = controller.PostUser(userToPost);
-            Assert.Equal(userToPost, postedUser);
+            var userToPost = new User(2, "user2@examle.com");
+            var response = controller.PostUser(userToPost);
+            Assert.IsType<CreatedAtActionResult>(response);
         }
 
         [Fact]
