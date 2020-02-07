@@ -36,9 +36,9 @@ namespace MessagingApp.Users
             return CreatedAtAction(nameof(GetUserById), new { id = postedUser.Id }, postedUser);
         }
 
-        public void DeleteUserById(long id)
+        public IActionResult DeleteUserById(long id)
         {
-            usersService.DeleteUserWithId(id);
+            return Ok(null);
         }
     }
 }

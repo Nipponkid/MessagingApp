@@ -84,11 +84,11 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void a_users_controller_can_delete_a_user_by_id()
+        public void deleting_an_existing_user_returns_200_OK()
         {
             var userToDelete = new User(1, "user1@example.com");
-            controller.DeleteUserById(userToDelete.Id);
-            Assert.DoesNotContain(userToDelete, GetListOfAllUsers());
+            var response = controller.DeleteUserById(userToDelete.Id);
+            Assert.IsType<OkObjectResult>(response);
         }
 
         private IEnumerable<User> GetListOfAllUsers()
