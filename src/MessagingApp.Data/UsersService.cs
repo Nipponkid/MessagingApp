@@ -33,11 +33,12 @@ namespace MessagingApp.Data
             return addedUser.Entity;
         }
 
-        public void DeleteUserWithId(long id)
+        public User DeleteUserWithId(long id)
         {
             var userToRemove = FindUserWithId(id);
-            context.Remove(userToRemove);
+            var removedEntry = context.Remove(userToRemove);
             context.SaveChanges();
+            return removedEntry.Entity;
         }
     }
 }

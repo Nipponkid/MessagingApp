@@ -31,7 +31,8 @@ namespace MessagingApp.Data
         /// <summary>
         /// Stop managing a user with a given ID.
         /// </summary>
+        /// <returns>The user that is no longer being managed.</returns>
         /// <param name="id">The ID a user to stop managing.</param>
-        public void DeleteUserWithId(long id);
+        public User DeleteUserWithId(long id);
     }
 }

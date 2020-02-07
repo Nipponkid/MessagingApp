@@ -50,6 +50,14 @@ namespace MessagingApp.Data.Tests
             usersService.DeleteUserWithId(userToDelete.Id);
             Assert.DoesNotContain(userToDelete, usersService.Users);
         }
+
+        [Fact]
+        public void deleting_a_user_by_id_returns_that_user()
+        {
+            var userToDelete = users[0];
+            var deletedUser = usersService.DeleteUserWithId(userToDelete.Id);
+            Assert.Equal(deletedUser, userToDelete);
+        }
     }
 
     public sealed class UsersServiceTests : IUsersServiceTests
