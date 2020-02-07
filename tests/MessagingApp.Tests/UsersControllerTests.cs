@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-using MessagingApp.Controllers;
 using MessagingApp.Data;
 using MessagingApp.Domain;
+using MessagingApp.Users;
 
 namespace MessagingApp.Tests
 {
@@ -69,18 +69,20 @@ namespace MessagingApp.Tests
         [Fact]
         public void posting_a_valid_user_returns_201_Created_with_Location_header()
         {
-            var userToPost = new User(2, "user2@examle.com");
-            var response = controller.PostUser(userToPost);
+            var userQuery = new UserQuery(2, "user2@example.com");
+            var response = controller.PostUser(userQuery);
             Assert.IsType<CreatedAtActionResult>(response);
         }
 
         [Fact]
-        public void when_a_users_controller_posts_a_user_that_user_is_in_the_list_of_all_users()
+        public void posting_a_user_adds_that_user_to_the_list_of_all_users()
         {
-            var userToPost = new User(7, "user7@example.com");
-            controller.PostUser(userToPost);
+            var userQuery = new UserQuery(7, "user7@example.com");
+            controller.PostUser(userQuery);
             var resultingUsers = controller.Users() as OkObjectResult;
-            Assert.Contains(userToPost, resultingUsers.Value as IEnumerable<User>);
+            var userToPost = new User(userQuery.Id, userQuery.Email);
+            var allUsers = resultingUsers.Value as IEnumerable<User>;
+            Assert.Contains(userToPost, allUsers);
         }
 
         [Fact]

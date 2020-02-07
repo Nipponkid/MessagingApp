@@ -3,7 +3,7 @@
 using MessagingApp.Data;
 using MessagingApp.Domain;
 
-namespace MessagingApp.Controllers
+namespace MessagingApp.Users
 {
     [ApiController]
     [Route("api/users")]
@@ -27,10 +27,12 @@ namespace MessagingApp.Controllers
             return Ok(usersService.FindUserWithId(id));
         }
 
-        public IActionResult PostUser(User userToPost)
+        [HttpPost]
+        public IActionResult PostUser(UserQuery userQuery)
         {
+            var userToPost = new User(userQuery.Id, userQuery.Email);
             var postedUser = usersService.AddUser(userToPost);
-            return CreatedAtAction(nameof(GetUserById), new { id = userToPost.Id }, userToPost);
+            return CreatedAtAction(nameof(GetUserById), new { id = postedUser.Id }, postedUser);
         }
 
         public void DeleteUserById(long id)
