@@ -38,6 +38,7 @@ namespace MessagingApp.Users
 
         public IActionResult DeleteUserById(long id)
         {
+            usersService.DeleteUserWithId(id);
             return Ok(null);
         }
     }

@@ -91,6 +91,14 @@ namespace MessagingApp.Tests
             Assert.IsType<OkObjectResult>(response);
         }
 
+        [Fact]
+        public void deleting_an_existing_user_removes_that_user_from_the_list_of_all_users()
+        {
+            var userToDelete = users[0];
+            controller.DeleteUserById(userToDelete.Id);
+            Assert.DoesNotContain(userToDelete, GetListOfAllUsers());
+        }
+
         private IEnumerable<User> GetListOfAllUsers()
         {
             var response = controller.GetAllUsers() as OkObjectResult;
