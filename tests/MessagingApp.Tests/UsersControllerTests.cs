@@ -40,14 +40,14 @@ namespace MessagingApp.Tests
         [Fact]
         public void a_users_controller_has_a_list_of_all_users()
         {
-            var result = controller.Users() as OkObjectResult;
+            var result = controller.GetAllUsers() as OkObjectResult;
             Assert.Equal(users, result.Value);
         }
 
         [Fact]
         public void getting_all_users_returns_a_200_OK()
         {
-            Assert.IsType<OkObjectResult>(controller.Users());
+            Assert.IsType<OkObjectResult>(controller.GetAllUsers());
         }
 
         [Fact]
@@ -79,10 +79,8 @@ namespace MessagingApp.Tests
         {
             var userQuery = new UserQuery(7, "user7@example.com");
             controller.PostUser(userQuery);
-            var resultingUsers = controller.Users() as OkObjectResult;
             var userToPost = new User(userQuery.Id, userQuery.Email);
-            var allUsers = resultingUsers.Value as IEnumerable<User>;
-            Assert.Contains(userToPost, allUsers);
+            Assert.Contains(userToPost, GetListOfAllUsers());
         }
 
         [Fact]
@@ -90,8 +88,13 @@ namespace MessagingApp.Tests
         {
             var userToDelete = new User(1, "user1@example.com");
             controller.DeleteUserById(userToDelete.Id);
-            var resultingUsers = controller.Users() as OkObjectResult;
-            Assert.DoesNotContain(userToDelete, resultingUsers.Value as IEnumerable<User>);
+            Assert.DoesNotContain(userToDelete, GetListOfAllUsers());
+        }
+
+        private IEnumerable<User> GetListOfAllUsers()
+        {
+            var response = controller.GetAllUsers() as OkObjectResult;
+            return response.Value as IEnumerable<User>;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MessagingApp.Users
         }
 
         [HttpGet]
-        public IActionResult Users()
+        public IActionResult GetAllUsers()
         {
             return Ok(usersService.Users);
         }
