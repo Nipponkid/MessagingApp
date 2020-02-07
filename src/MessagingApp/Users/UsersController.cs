@@ -22,6 +22,7 @@ namespace MessagingApp.Users
             return Ok(usersService.Users);
         }
 
+        [HttpGet("{id}")]
         public IActionResult GetUserById(long id)
         {
             return Ok(usersService.FindUserWithId(id));
