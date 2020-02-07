@@ -92,6 +92,15 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
+        public void deleting_an_existing_user_returns_that_user()
+        {
+            var userToDelete = users[0];
+            var response = controller.DeleteUserById(userToDelete.Id) as OkObjectResult;
+            var deletedUser = response.Value;
+            Assert.Equal(userToDelete, deletedUser);
+        }
+
+        [Fact]
         public void deleting_an_existing_user_removes_that_user_from_the_list_of_all_users()
         {
             var userToDelete = users[0];
