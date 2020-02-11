@@ -9,6 +9,8 @@
     <Folder Include="wwwroot\" />
     <Folder Include="Controllers\" />
     <Folder Include="Users\" />
+    <Folder Include="wwwroot\users\" />
+    <Folder Include="wwwroot\tests\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MessagingApp.Domain\MessagingApp.Domain.csproj">
@@ -20,5 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,9 @@
+﻿# This file is the top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+
+[*.js]
+indent_size = 2
