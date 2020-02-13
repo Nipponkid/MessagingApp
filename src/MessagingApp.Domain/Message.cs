@@ -1,4 +1,6 @@
-﻿namespace MessagingApp.Domain
+﻿using System;
+
+namespace MessagingApp.Domain
 {
     /// <summary>
     /// A message.
@@ -24,5 +26,25 @@
         public string Content { get; private set; }
         public User Sender { get; private set; }
         public User Receiver { get; private set; }
+
+        public override bool Equals(object obj)
+        {
+            if ((obj == null) || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Message m = (Message)obj;
+                return (Sender == m.Sender)
+                    && (Receiver == m.Receiver)
+                    && (Content == m.Content);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Content, Sender, Receiver);
+        }
     }
 }
