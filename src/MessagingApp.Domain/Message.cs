@@ -5,13 +5,13 @@
     /// </summary>
     public sealed class Message
     {
-        public Message(long id, string text)
+        public Message(long id, string content)
         {
             Id = id;
-            Text = text;
+            Content = content;
         }
 
         public long Id { get; private set; }
-        public string Text { get; private set; }
+        public string Content { get; private set; }
     }
 }

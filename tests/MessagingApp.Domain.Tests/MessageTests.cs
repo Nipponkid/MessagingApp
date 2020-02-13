@@ -18,9 +18,9 @@ namespace MessagingApp.Domain.Tests
         }
 
         [Fact]
-        public void a_message_has_text()
+        public void a_message_has_content()
         {
-            Assert.Equal("Hello, World!", message.Text);
+            Assert.Equal("Hello, World!", message.Content);
         }
     }
 }
