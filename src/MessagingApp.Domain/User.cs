@@ -1,4 +1,6 @@
-﻿namespace MessagingApp.Domain
+﻿using System;
+
+namespace MessagingApp.Domain
 {
     public sealed class User
     {
@@ -22,6 +24,11 @@
                 User u = (User)obj;
                 return Email == u.Email;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Email);
         }
     }
 }
