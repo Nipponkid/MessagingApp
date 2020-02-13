@@ -1,4 +1,6 @@
-﻿namespace MessagingApp.Domain
+﻿using System;
+
+namespace MessagingApp.Domain
 {
     public sealed class Contact
     {
@@ -29,6 +31,11 @@
                     && (FirstName == c.FirstName)
                     && (LastName == c.LastName);
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, UserId, FirstName, LastName);
         }
     }
 }
