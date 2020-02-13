@@ -11,6 +11,7 @@
     <Folder Include="Users\" />
     <Folder Include="wwwroot\users\" />
     <Folder Include="wwwroot\tests\" />
+    <Folder Include="Messages\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MessagingApp.Domain\MessagingApp.Domain.csproj">
