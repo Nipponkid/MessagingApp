@@ -5,12 +5,16 @@ namespace MessagingApp.Domain.Tests
     public sealed class MessageTests
     {
         private readonly User sender;
+        private readonly User receiver;
+        private readonly string content;
         private readonly Message message;
 
         public MessageTests()
         {
             sender = new User(1, "user1@example.com");
-            message = new Message(1, sender, "Hello, World!");
+            receiver = new User(2, "user2@example.com");
+            content = "Hello, World!";
+            message = new Message(1, sender, receiver, "Hello, World!");
         }
 
         [Fact]
@@ -26,9 +30,15 @@ namespace MessagingApp.Domain.Tests
         }
 
         [Fact]
+        public void a_message_has_a_receiver()
+        {
+            Assert.Equal(receiver, message.Receiver);
+        }
+
+        [Fact]
         public void a_message_has_content()
         {
-            Assert.Equal("Hello, World!", message.Content);
+            Assert.Equal(content, message.Content);
         }
     }
 }
