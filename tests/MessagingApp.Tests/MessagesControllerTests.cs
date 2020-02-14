@@ -40,5 +40,13 @@ namespace MessagingApp.Tests
             var allMessages = result.Value as List<Message>;
             Assert.Equal(messages, allMessages);
         }
+
+        [Fact]
+        public void getting_an_existing_message_by_id_returns_200_OK()
+        {
+            var message = messages[0];
+            var response = messagesController.GetMessageById(message.Id);
+            Assert.IsType<OkObjectResult>(response);
+        }
     }
 }

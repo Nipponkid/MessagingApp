@@ -18,5 +18,10 @@ namespace MessagingApp.Messages
         {
             return Ok(messages);
         }
+
+        public IActionResult GetMessageById(long id)
+        {
+            return Ok(null);
+        }
     }
 }
