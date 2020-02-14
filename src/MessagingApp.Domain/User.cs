@@ -26,6 +26,26 @@ namespace MessagingApp.Domain
             }
         }
 
+        public static bool operator ==(User lhs, User rhs)
+        {
+            if (Object.ReferenceEquals(lhs, null))
+            {
+                if (Object.ReferenceEquals(rhs, null))
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(User lhs, User rhs)
+        {
+            return !(lhs == rhs);
+        }
+
         public override int GetHashCode()
         {
             return HashCode.Combine(Id, Email);
