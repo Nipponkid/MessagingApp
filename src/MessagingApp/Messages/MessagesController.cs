@@ -7,9 +7,9 @@ namespace MessagingApp.Messages
 {
     public sealed class MessagesController : ControllerBase
     {
-        private readonly IEnumerable<Message> messages;
+        private readonly List<Message> messages;
 
-        public MessagesController(IEnumerable<Message> messages)
+        public MessagesController(List<Message> messages)
         {
             this.messages = messages;
         }
@@ -21,7 +21,8 @@ namespace MessagingApp.Messages
 
         public IActionResult GetMessageById(long id)
         {
-            return Ok(null);
+            var message = messages.Find(m => m.Id == id);
+            return Ok(message);
         }
     }
 }
