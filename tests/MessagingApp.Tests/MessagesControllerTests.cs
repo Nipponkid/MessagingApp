@@ -57,5 +57,13 @@ namespace MessagingApp.Tests
             var receivedMessage = response.Value as Message;
             Assert.Equal(message, receivedMessage);
         }
+
+        [Fact]
+        public void posting_a_message_returns_a_201_Created_with_Location_header()
+        {
+            var message = new PostMessageRequest(1, 2, "How are you?");
+            var response = messagesController.PostMessage(message);
+            Assert.IsType<CreatedAtActionResult>(response);
+        }
     }
 }

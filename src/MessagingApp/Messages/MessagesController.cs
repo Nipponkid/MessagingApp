@@ -24,5 +24,10 @@ namespace MessagingApp.Messages
             var message = messages.Find(m => m.Id == id);
             return Ok(message);
         }
+
+        public IActionResult PostMessage(PostMessageRequest message)
+        {
+            return CreatedAtAction(nameof(GetMessageById), null);
+        }
     }
 }
