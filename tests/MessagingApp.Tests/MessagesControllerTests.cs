@@ -27,14 +27,14 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void getting_all_messages_returns_200_OK()
+        public void Getting_all_messages_returns_200_OK()
         {
             var result = messagesController.GetAllMessages();
             Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]
-        public void getting_all_messages_returns_all_messages()
+        public void Getting_all_messages_returns_all_messages()
         {
             var result = messagesController.GetAllMessages() as OkObjectResult;
             var allMessages = result.Value as List<Message>;
@@ -42,7 +42,7 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void getting_an_existing_message_by_id_returns_200_OK()
+        public void Getting_an_existing_message_by_id_returns_200_OK()
         {
             var message = messages[0];
             var response = messagesController.GetMessageById(message.Id);
@@ -50,7 +50,7 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void getting_an_existing_message_by_id_returns_that_message()
+        public void Getting_an_existing_message_by_id_returns_that_message()
         {
             var message = messages[0];
             var response = messagesController.GetMessageById(message.Id) as OkObjectResult;
@@ -59,7 +59,7 @@ namespace MessagingApp.Tests
         }
 
         [Fact]
-        public void posting_a_message_returns_a_201_Created_with_Location_header()
+        public void Posting_a_message_returns_a_201_Created_with_Location_header()
         {
             var message = new PostMessageRequest(1, 2, "How are you?");
             var response = messagesController.PostMessage(message);
