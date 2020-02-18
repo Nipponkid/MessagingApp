@@ -25,9 +25,15 @@ namespace MessagingApp.Messages
             return Ok(message);
         }
 
-        public IActionResult PostMessage(PostMessageRequest message)
+        public IActionResult PostMessage(PostMessageRequest request)
         {
-            return CreatedAtAction(nameof(GetMessageById), null);
+            var response = new PostMessageResponse(
+                request.Id,
+                request.SenderId,
+                request.ReceiverId,
+                request.Content
+            );
+            return CreatedAtAction(null, response);
         }
     }
 }

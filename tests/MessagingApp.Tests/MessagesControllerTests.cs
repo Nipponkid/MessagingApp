@@ -61,9 +61,19 @@ namespace MessagingApp.Tests
         [Fact]
         public void Posting_a_message_returns_a_201_Created_with_Location_header()
         {
-            var message = new PostMessageRequest(1, 2, "How are you?");
+            var message = new PostMessageRequest(3, 1, 2, "How are you?");
             var response = messagesController.PostMessage(message);
             Assert.IsType<CreatedAtActionResult>(response);
+        }
+
+        [Fact]
+        public void Posting_a_message_returns_that_message()
+        {
+            var request = new PostMessageRequest(3, 1, 2, "How are you?");
+            var response = messagesController.PostMessage(request) as CreatedAtActionResult;
+            var actual = (PostMessageResponse)response.Value;
+            var expected = new PostMessageResponse(3, 1, 2, "How are you?");
+            Assert.Equal(expected, actual);
         }
     }
 }

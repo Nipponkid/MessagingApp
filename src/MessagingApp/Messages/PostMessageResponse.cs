@@ -1,8 +1,8 @@
 ﻿namespace MessagingApp.Messages
 {
-    public struct PostMessageRequest
+    public struct PostMessageResponse
     {
-        public PostMessageRequest(long id, long senderId, long receiverId, string content)
+        public PostMessageResponse(long id, long senderId, long receiverId, string content)
         {
             Id = id;
             SenderId = senderId;
