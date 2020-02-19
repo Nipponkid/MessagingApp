@@ -44,7 +44,7 @@ namespace MessagingApp.Data.Tests
         {
             var id = 100;
             var receivedMessage = messagesService.GetMessageById(id);
-            Assert.Equal(null, receivedMessage);
+            Assert.Null(receivedMessage);
         }
 
         private Message CreateAMessage()
