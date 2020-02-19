@@ -66,19 +66,26 @@ namespace MessagingApp.Tests
         [Fact]
         public void Posting_a_message_returns_a_201_Created_with_Location_header()
         {
-            var message = new PostMessageRequest(3, 1, 2, "How are you?");
-            var response = messagesController.PostMessage(message);
+            var response = PostNewMessage();
             Assert.IsType<CreatedAtActionResult>(response);
         }
 
         [Fact]
         public void Posting_a_message_returns_that_message()
         {
-            var request = new PostMessageRequest(3, 1, 2, "How are you?");
-            var response = messagesController.PostMessage(request) as CreatedAtActionResult;
-            var actual = response.Value as Message;
-            var expected = new Message(3, users[0], users[1], "How are you?");
+            var actual = PostNewMessage().Value as Message;
+            var expected = new Message(3, users[1], users[0], "How about you?");
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void Posting_a_message_adds_that_message_to_the_list_of_all_messages()
+        {
+            PostNewMessage();
+            var getAllMessagesResponse = messagesController.GetAllMessages() as OkObjectResult;
+            var allMessages = getAllMessagesResponse.Value as IEnumerable<Message>;
+            var message = new Message(3, users[1], users[0], "How about you?");
+            Assert.Contains(message, allMessages);
         }
 
         private IUsersService CreateIUsersService()
@@ -93,6 +100,13 @@ namespace MessagingApp.Tests
             }
             dbContext.SaveChanges();
             return new UsersService(dbContext);
+        }
+
+        private CreatedAtActionResult PostNewMessage()
+        {
+            var request = new PostMessageRequest(3, 2, 1, "How about you?");
+            var response = messagesController.PostMessage(request);
+            return response as CreatedAtActionResult;
         }
     }
 }

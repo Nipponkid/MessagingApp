@@ -33,6 +33,7 @@ namespace MessagingApp.Messages
             var sender = usersService.FindUserWithId(request.SenderId);
             var receiver = usersService.FindUserWithId(request.ReceiverId);
             var message = new Message(request.Id, sender, receiver, request.Content);
+            messages.Add(message);
             return CreatedAtAction(null, message);
         }
     }
