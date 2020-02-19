@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Xunit;
 
 using MessagingApp.Data;
+using MessagingApp.Data.Messages;
 using MessagingApp.Domain;
 using MessagingApp.Messages;
 
@@ -15,6 +16,7 @@ namespace MessagingApp.Tests
         private readonly List<User> users;
         private readonly List<Message> messages;
         private readonly IUsersService usersService;
+        private readonly MessagesService messagesService;
         private readonly MessagesController messagesController;
 
         public MessagesControllerTests()
@@ -28,7 +30,9 @@ namespace MessagingApp.Tests
                 new Message(2, users[1], users[0], "Good")
             };
             usersService = CreateIUsersService();
-            messagesController = new MessagesController(messages, usersService);
+            messagesService = new MessagesService(messages);
+            messagesController = new MessagesController(
+                messagesService, usersService);
         }
 
         [Fact]
