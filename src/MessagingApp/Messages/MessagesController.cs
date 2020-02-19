@@ -27,6 +27,7 @@ namespace MessagingApp.Messages
             return Ok(messagesService.Messages);
         }
 
+        [HttpGet("{id}")]
         public IActionResult GetMessageById(long id)
         {
             return Ok(messagesService.GetMessageById(id));
