@@ -37,7 +37,14 @@ namespace MessagingApp.Data.Tests
             var messageToGet = AddAMessage(CreateAMessage());
             var receivedMessage = messagesService.GetMessageById(messageToGet.Id);
             Assert.Equal(messageToGet, receivedMessage);
+        }
 
+        [Fact]
+        public void Getting_a_non_existent_message_by_ID_returns_null()
+        {
+            var id = 100;
+            var receivedMessage = messagesService.GetMessageById(id);
+            Assert.Equal(null, receivedMessage);
         }
 
         private Message CreateAMessage()

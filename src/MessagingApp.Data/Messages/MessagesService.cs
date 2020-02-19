@@ -29,12 +29,8 @@ namespace MessagingApp.Data.Messages
 
         public Message GetMessageById(long id)
         {
-            return new Message(
-                id,
-                new User(1, "user1@example.com"),
-                new User(2, "user2@example.com"),
-                "What's up?"
-            );
+            var message = messages.Find(m => m.Id == id);
+            return message;
         }
     }
 }
