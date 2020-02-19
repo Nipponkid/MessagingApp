@@ -42,9 +42,9 @@ namespace MessagingApp.Domain.Tests
         }
 
         [Fact]
-        public void two_messages_with_the_same_sender_receiver_and_content_are_equal()
+        public void two_messages_with_the_same_id_sender_receiver_and_content_are_equal()
         {
-            var messageTwo = new Message(2, sender, receiver, content);
+            var messageTwo = new Message(1, sender, receiver, content);
             Assert.Equal(messageTwo, message);
         }
     }

@@ -7,13 +7,6 @@ namespace MessagingApp.Domain
     /// </summary>
     public sealed class Message
     {
-        public Message(long id, User sender, string content)
-        {
-            Id = id;
-            Content = content;
-            Sender = sender;
-        }
-
         public Message(long id, User sender, User receiver, string content)
         {
             Id = id;
@@ -36,7 +29,8 @@ namespace MessagingApp.Domain
             else
             {
                 Message m = (Message)obj;
-                return (Sender == m.Sender)
+                return (Id == m.Id)
+                    && (Sender == m.Sender)
                     && (Receiver == m.Receiver)
                     && (Content == m.Content);
             }
@@ -44,7 +38,7 @@ namespace MessagingApp.Domain
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Content, Sender, Receiver);
+            return HashCode.Combine(Id, Content, Sender, Receiver);
         }
     }
 }
