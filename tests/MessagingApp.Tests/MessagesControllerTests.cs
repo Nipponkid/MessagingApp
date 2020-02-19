@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
+using MessagingApp.Data;
 using MessagingApp.Domain;
 using MessagingApp.Messages;
 
@@ -11,6 +14,7 @@ namespace MessagingApp.Tests
     {
         private readonly List<User> users;
         private readonly List<Message> messages;
+        private readonly IUsersService usersService;
         private readonly MessagesController messagesController;
 
         public MessagesControllerTests()
@@ -23,7 +27,8 @@ namespace MessagingApp.Tests
                 new Message(1, users[0], users[1], "How are you?"),
                 new Message(2, users[1], users[0], "Good")
             };
-            messagesController = new MessagesController(messages);
+            usersService = CreateIUsersService();
+            messagesController = new MessagesController(messages, usersService);
         }
 
         [Fact]
@@ -71,9 +76,23 @@ namespace MessagingApp.Tests
         {
             var request = new PostMessageRequest(3, 1, 2, "How are you?");
             var response = messagesController.PostMessage(request) as CreatedAtActionResult;
-            var actual = (PostMessageResponse)response.Value;
-            var expected = new PostMessageResponse(3, 1, 2, "How are you?");
+            var actual = response.Value as Message;
+            var expected = new Message(3, users[0], users[1], "How are you?");
             Assert.Equal(expected, actual);
+        }
+
+        private IUsersService CreateIUsersService()
+        {
+            var contextOptions = new DbContextOptionsBuilder<MessagingAppDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            var dbContext = new MessagingAppDbContext(contextOptions);
+            foreach (var user in users)
+            {
+                dbContext.Add(user);
+            }
+            dbContext.SaveChanges();
+            return new UsersService(dbContext);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
+using MessagingApp.Data;
 using MessagingApp.Domain;
 
 namespace MessagingApp.Messages
@@ -8,10 +9,12 @@ namespace MessagingApp.Messages
     public sealed class MessagesController : ControllerBase
     {
         private readonly List<Message> messages;
+        private readonly IUsersService usersService;
 
-        public MessagesController(List<Message> messages)
+        public MessagesController(List<Message> messages, IUsersService usersService)
         {
             this.messages = messages;
+            this.usersService = usersService;
         }
 
         public IActionResult GetAllMessages()
@@ -27,13 +30,10 @@ namespace MessagingApp.Messages
 
         public IActionResult PostMessage(PostMessageRequest request)
         {
-            var response = new PostMessageResponse(
-                request.Id,
-                request.SenderId,
-                request.ReceiverId,
-                request.Content
-            );
-            return CreatedAtAction(null, response);
+            var sender = usersService.FindUserWithId(request.SenderId);
+            var receiver = usersService.FindUserWithId(request.ReceiverId);
+            var message = new Message(request.Id, sender, receiver, request.Content);
+            return CreatedAtAction(null, message);
         }
     }
 }
