@@ -6,6 +6,8 @@ using MessagingApp.Domain;
 
 namespace MessagingApp.Messages
 {
+    [ApiController]
+    [Route("/api/messages")]
     public sealed class MessagesController : ControllerBase
     {
         private readonly MessagesService messagesService;
@@ -19,6 +21,7 @@ namespace MessagingApp.Messages
             this.usersService = usersService;
         }
 
+        [HttpGet]
         public IActionResult GetAllMessages()
         {
             return Ok(messagesService.Messages);
