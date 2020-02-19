@@ -26,5 +26,15 @@ namespace MessagingApp.Data.Messages
             messages.Add(message);
             return message;
         }
+
+        public Message GetMessageById(long id)
+        {
+            return new Message(
+                id,
+                new User(1, "user1@example.com"),
+                new User(2, "user2@example.com"),
+                "What's up?"
+            );
+        }
     }
 }

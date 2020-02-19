@@ -31,6 +31,15 @@ namespace MessagingApp.Data.Tests
             Assert.Contains(messageToAdd, messagesService.Messages);
         }
 
+        [Fact]
+        public void Getting_an_existing_message_by_ID_returns_the_message_with_that_ID()
+        {
+            var messageToGet = AddAMessage(CreateAMessage());
+            var receivedMessage = messagesService.GetMessageById(messageToGet.Id);
+            Assert.Equal(messageToGet, receivedMessage);
+
+        }
+
         private Message CreateAMessage()
         {
             var sender = new User(1, "user1@example.com");
