@@ -1,7 +1,11 @@
 ﻿namespace MessagingApp.Messages
 {
-    public struct PostMessageRequest
+    public sealed class PostMessageRequest
     {
+        public PostMessageRequest()
+        {
+        }
+
         public PostMessageRequest(long id, long senderId, long receiverId, string content)
         {
             Id = id;
@@ -10,9 +14,9 @@
             Content = content;
         }
 
-        public long Id { get; }
-        public long SenderId { get; }
-        public long ReceiverId { get; }
-        public string Content { get; }
+        public long Id { get; set;  }
+        public long SenderId { get; set; }
+        public long ReceiverId { get; set; }
+        public string Content { get; set; }
     }
 }

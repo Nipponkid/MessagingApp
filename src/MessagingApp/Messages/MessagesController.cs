@@ -33,6 +33,7 @@ namespace MessagingApp.Messages
             return Ok(messagesService.GetMessageById(id));
         }
 
+        [HttpPost]
         public IActionResult PostMessage(PostMessageRequest request)
         {
             var sender = usersService.FindUserWithId(request.SenderId);
