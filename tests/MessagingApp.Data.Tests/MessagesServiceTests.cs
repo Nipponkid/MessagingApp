@@ -8,15 +8,39 @@ namespace MessagingApp.Data.Tests
 {
     public sealed class MessagesServiceTests
     {
+        private readonly MessagesService messagesService;
+
+        public MessagesServiceTests()
+        {
+            messagesService = new MessagesService(new List<Message>());
+        }
+
         [Fact]
         public void Adding_a_message_returns_that_message()
         {
+            var messageToAdd = CreateAMessage();
+            var addedMessage = AddAMessage(messageToAdd);
+            Assert.Equal(messageToAdd, addedMessage);
+        }
+
+        [Fact]
+        public void Adding_a_message_adds_that_message_to_the_list_of_all_messages()
+        {
+            var messageToAdd = CreateAMessage();
+            AddAMessage(messageToAdd);
+            Assert.Contains(messageToAdd, messagesService.Messages);
+        }
+
+        private Message CreateAMessage()
+        {
             var sender = new User(1, "user1@example.com");
             var receiver = new User(2, "user2@example.com");
-            var messageToAdd = new Message(1, sender, receiver, "What's up?");
-            var messagesService = new MessagesService(new List<Message>());
-            var addedMessage = messagesService.AddMessage(messageToAdd);
-            Assert.Equal(messageToAdd, addedMessage);
+            return new Message(1, sender, receiver, "What's up?");
+        }
+
+        private Message AddAMessage(Message message)
+        {
+            return messagesService.AddMessage(message);
         }
     }
 }
