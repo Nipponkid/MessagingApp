@@ -24,10 +24,6 @@ namespace MessagingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var user = new User(0, "user0@example.com");
-            var contacts = new List<Contact>() { new Contact(0, user, "John", "Smith") };
-            services.AddTransient(x => contacts);
-
             services.AddTransient<IUsersService, UsersService>();
             services.AddDbContext<MessagingAppDbContext>(options => options.UseInMemoryDatabase("Messaging_App_DB"));
 
