@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using Xunit;
 
 using MessagingApp.Data.Messages;
@@ -12,7 +13,7 @@ namespace MessagingApp.Data.Tests
 
         public MessagesServiceTests()
         {
-            messagesService = new MessagesService(new List<Message>());
+            messagesService = new MessagesService(CreateContext());
         }
 
         [Fact]
@@ -45,6 +46,14 @@ namespace MessagingApp.Data.Tests
             var id = 100;
             var receivedMessage = messagesService.GetMessageById(id);
             Assert.Null(receivedMessage);
+        }
+
+        private MessagingAppDbContext CreateContext()
+        {
+            var contextOptions = new DbContextOptionsBuilder<MessagingAppDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+            return new MessagingAppDbContext(contextOptions);
         }
 
         private Message CreateAMessage()

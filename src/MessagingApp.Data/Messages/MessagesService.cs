@@ -6,31 +6,31 @@ namespace MessagingApp.Data.Messages
 {
     public sealed class MessagesService
     {
-        private List<Message> messages;
+        private readonly MessagingAppDbContext context;
 
-        public MessagesService(List<Message> messages)
+        public MessagesService(MessagingAppDbContext context)
         {
-            this.messages = messages;
+            this.context = context;
         }
 
         public IEnumerable<Message> Messages
         {
             get
             {
-                return messages;
+                return context.Messages;
             }
         }
 
-        public Message AddMessage(Message message)
+        public Message AddMessage(Message messageToAdd)
         {
-            messages.Add(message);
-            return message;
+            var addedMessage = context.Add(messageToAdd);
+            context.SaveChanges();
+            return addedMessage.Entity;
         }
 
         public Message GetMessageById(long id)
         {
-            var message = messages.Find(m => m.Id == id);
-            return message;
+            return context.Messages.Find(id);
         }
     }
 }

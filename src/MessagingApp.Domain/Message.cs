@@ -15,6 +15,11 @@ namespace MessagingApp.Domain
             Receiver = receiver;
         }
 
+        // For Entity Framework
+        private Message()
+        {
+        }
+
         public long Id { get; private set; }
         public string Content { get; private set; }
         public User Sender { get; private set; }

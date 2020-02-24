@@ -29,8 +29,9 @@ namespace MessagingApp.Tests
                 new Message(1, users[0], users[1], "How are you?"),
                 new Message(2, users[1], users[0], "Good")
             };
-            usersService = CreateIUsersService();
-            messagesService = new MessagesService(messages);
+            var context = CreateContext();
+            usersService = new UsersService(context);
+            messagesService = new MessagesService(context);
             messagesController = new MessagesController(
                 messagesService, usersService);
         }
@@ -46,7 +47,7 @@ namespace MessagingApp.Tests
         public void Getting_all_messages_returns_all_messages()
         {
             var result = messagesController.GetAllMessages() as OkObjectResult;
-            var allMessages = result.Value as List<Message>;
+            var allMessages = result.Value as IEnumerable<Message>;
             Assert.Equal(messages, allMessages);
         }
 
@@ -92,18 +93,25 @@ namespace MessagingApp.Tests
             Assert.Contains(message, allMessages);
         }
 
-        private IUsersService CreateIUsersService()
+        private MessagingAppDbContext CreateContext()
         {
             var contextOptions = new DbContextOptionsBuilder<MessagingAppDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
-            var dbContext = new MessagingAppDbContext(contextOptions);
+            var context = new MessagingAppDbContext(contextOptions);
+
             foreach (var user in users)
             {
-                dbContext.Add(user);
+                context.Add(user);
             }
-            dbContext.SaveChanges();
-            return new UsersService(dbContext);
+
+            foreach (var message in messages)
+            {
+                context.Add(message);
+            }
+
+            context.SaveChanges();
+            return context;
         }
 
         private CreatedAtActionResult PostNewMessage()

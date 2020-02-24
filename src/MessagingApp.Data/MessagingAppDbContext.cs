@@ -12,5 +12,6 @@ namespace MessagingApp.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }
