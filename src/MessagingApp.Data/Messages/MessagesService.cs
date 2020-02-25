@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 using MessagingApp.Domain;
 
@@ -17,7 +18,9 @@ namespace MessagingApp.Data.Messages
         {
             get
             {
-                return context.Messages;
+                return context.Messages
+                    .Include(message => message.Sender)
+                    .Include(message => message.Receiver);
             }
         }
 

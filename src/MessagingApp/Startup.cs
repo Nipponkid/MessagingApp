@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
 
 using MessagingApp.Data;
 using MessagingApp.Data.Messages;
-using MessagingApp.Domain;
 
 namespace MessagingApp
 {
@@ -26,12 +24,6 @@ namespace MessagingApp
         {
             services.AddTransient<IUsersService, UsersService>();
             services.AddDbContext<MessagingAppDbContext>(options => options.UseInMemoryDatabase("Messaging_App_DB"));
-
-            var messages = new List<Message>() {
-                new Message(1, new User(1, "user1@example.com"), new User(2, "user2@example.com"), "How are you?"),
-                new Message(2, new User(2, "user2@example.com"), new User(1, "user1@example.com"), "Good. You?")
-            };
-            services.AddTransient(x => messages);
             services.AddTransient<MessagesService, MessagesService>();
 
             services.AddControllers();
