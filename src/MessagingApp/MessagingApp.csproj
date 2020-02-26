@@ -6,10 +6,7 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
     <Folder Include="Users\" />
-    <Folder Include="wwwroot\users\" />
-    <Folder Include="wwwroot\tests\" />
     <Folder Include="Messages\" />
   </ItemGroup>
   <ItemGroup>
@@ -26,5 +23,8 @@
   <ItemGroup>
     <Content Remove="package-lock.json" />
     <Content Remove="wwwroot\users.html" />
+    <Content Remove="wwwroot\users.html" />
+    <Content Remove="wwwroot\main.js" />
+    <Content Remove="wwwroot\users\users.js" />
   </ItemGroup>
 </Project>
