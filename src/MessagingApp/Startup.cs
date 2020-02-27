@@ -23,7 +23,8 @@ namespace MessagingApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUsersService, UsersService>();
-            services.AddDbContext<MessagingAppDbContext>(options => options.UseInMemoryDatabase("Messaging_App_DB"));
+            //services.AddDbContext<MessagingAppDbContext>(options => options.UseInMemoryDatabase("Messaging_App_DB"));
+            services.AddDbContext<MessagingAppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("MessagingApp")));
             services.AddTransient<MessagesService, MessagesService>();
 
             services.AddControllers();
